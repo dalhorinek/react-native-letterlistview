@@ -1,27 +1,34 @@
 'use strict';
 /* jshint esnext: true */
 
-var React = require('react-native');
-var {Component, ListView, StyleSheet, View, PropTypes, NativeModules} = React;
-var UIManager = NativeModules.UIManager;
-var merge = require('merge');
+import React from 'react-native';
+import {
+  Component,
+  ListView,
+  StyleSheet,
+  View,
+  PropTypes,
+  NativeModules
+} from React;
+import merge from 'merge';
 
-var SectionHeader = require('./SectionHeader');
-var SectionList = require('./SectionList');
+import SectionHeader from './SectionHeader'; 
+import SectionList from './SectionList';
 
-var stylesheetProp = PropTypes.oneOfType([
+const UIManager = NativeModules.UIManager;
+
+const stylesheetProp = PropTypes.oneOfType([
   PropTypes.number,
   PropTypes.object,
 ]);
 
-
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1
   }
 });
 
-export default class SelectableSectionsListView extends Component {
+class SelectableSectionsListView extends Component {
 
   static propTypes = {
     /**
@@ -277,3 +284,5 @@ export default class SelectableSectionsListView extends Component {
     );
   }
 }
+
+module.exports = SelectableSectionsListView;

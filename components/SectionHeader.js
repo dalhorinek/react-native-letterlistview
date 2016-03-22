@@ -1,10 +1,18 @@
 'use strict';
 
-var React = require('react-native');
-var {Component, PropTypes, StyleSheet, View, Text, NativeModules} = React;
-var UIManager = NativeModules.UIManager;
+import React from 'react-native';
+import {
+  Component,
+  PropTypes,
+  StyleSheet,
+  View,
+  Text,
+  NativeModules
+} = React;
 
-var styles = StyleSheet.create({
+const UIManager = NativeModules.UIManager;
+
+const styles = StyleSheet.create({
   container: {
     backgroundColor:'#f8f8f8',
     borderTopWidth: 1,
@@ -18,7 +26,7 @@ var styles = StyleSheet.create({
   }
 });
 
-export default class SectionHeader extends Component {
+class SectionHeader extends Component {
 
   static propTypes = {
 
@@ -49,3 +57,5 @@ export default class SectionHeader extends Component {
     );
   }
 }
+
+module.exports = SectionHeader;
