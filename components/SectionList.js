@@ -7,6 +7,33 @@ var UIManager = NativeModules.UIManager;
 var noop = () => {};
 var returnTrue = () => true;
 
+var styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    backgroundColor: '#fff',
+    alignItems:'center',
+    justifyContent:'center',
+    right: 0,
+    top: 0,
+    bottom: 0,
+    width: 15
+  },
+
+  item: {
+    padding: 0
+  },
+
+  text: {
+    fontWeight: '700',
+    color: '#008fff'
+  },
+
+  inactivetext: {
+    fontWeight: '700',
+    color: '#CCCCCC'
+  }
+});
+
 class SectionList extends Component {
 
   constructor(props, context) {
@@ -162,32 +189,5 @@ SectionList.propTypes = {
     PropTypes.object,
   ])
 };
-
-var styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    backgroundColor: 'transparent',
-    alignItems:'center',
-    justifyContent:'center',
-    right: 0,
-    top: 0,
-    bottom: 0,
-    width: 15
-  },
-
-  item: {
-    padding: 0
-  },
-
-  text: {
-    fontWeight: '700',
-    color: '#008fff'
-  },
-
-  inactivetext: {
-    fontWeight: '700',
-    color: '#CCCCCC'
-  }
-});
 
 module.exports = SectionList;

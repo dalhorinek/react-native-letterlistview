@@ -108,12 +108,12 @@ class SelectableSectionsListView extends Component {
       var maxY = this.totalHeight - this.containerHeight + headerHeight;
       y = y > maxY ? maxY : y;
 
-      this.refs.listview.refs.listviewscroll.scrollTo(y, 0);
+      this.refs.listview.refs.listviewscroll.scrollTo(y, 0, false);
     } else {
       // this breaks, if not all of the listview is pre-rendered!
       UIManager.measure(this.cellTagMap[section], (x, y, w, h) => {
         y = y - this.props.sectionHeaderHeight;
-        this.refs.listview.refs.listviewscroll.scrollTo(y, 0);
+        this.refs.listview.refs.listviewscroll.scrollTo(y, 0, false);
       });
     }
 
