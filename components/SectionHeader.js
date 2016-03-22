@@ -3,25 +3,6 @@
 var React = require('react-native');
 var {Component, PropTypes, StyleSheet, View, Text, NativeModules} = React;
 var UIManager = NativeModules.UIManager;
-class SectionHeader extends Component {
-
-  componentDidMount() {
-    this.props.updateTag && this.props.updateTag(React.findNodeHandle(this.refs.view), this.props.sectionId);
-  }
-
-  render() {
-    var SectionComponent = this.props.component;
-    var content = SectionComponent ?
-      <SectionComponent {...this.props} /> :
-      <Text style={styles.text}>{this.props.title}</Text>;
-
-    return (
-      <View ref="view" style={styles.container}>
-        {content}
-      </View>
-    );
-  }
-}
 
 var styles = StyleSheet.create({
   container: {
@@ -37,26 +18,34 @@ var styles = StyleSheet.create({
   }
 });
 
-SectionHeader.propTypes = {
+export default class SectionHeader extends Component {
 
-  /**
-   * The id of the section
-   */
-  sectionId: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string
-  ]),
+  static propTypes = {
 
-  /**
-   * A component to render for each section item
-   */
-  component: PropTypes.func,
+    /**
+     * The id of the section
+     */
+    sectionId: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
 
-  /**
-   * A function used to propagate the root nodes handle back to the parent
-   */
-  updateTag: PropTypes.func
+    /**
+     * A component to render for each section item
+     */
+    component: PropTypes.func,
+  };
 
-};
+  render() {
+    var SectionComponent = this.props.component;
+    var content = SectionComponent ?
+      <SectionComponent {...this.props} /> :
+      <Text style={styles.text}>{this.props.title}</Text>;
 
-module.exports = SectionHeader;
+    return (
+      <View ref="view" style={styles.container}>
+        {content}
+      </View>
+    );
+  }
+}
