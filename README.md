@@ -1,7 +1,7 @@
 A Listview with a sidebar to directly jump to sections.
 
-## Based on https://github.com/sunnylqm/react-native-alphabetlistview
-This is a form of sunny's react-native-alphabetlistview with adjustments and some extensions
+## Based on https://github.com/sunnylqm/react-native-letterlistview
+This is a form of sunny's react-native-letterlistview with adjustments and some extensions
 It was rewritten to ES6, I changes the mechanism of scrolling, now it's not needed to add cell and section height. 
 Also it shows all letters and when you select the one where are no items, it scrolls to previous which has some data (It's same as in iOS)
     
@@ -12,7 +12,7 @@ One last addition is that you can pass text and item styles of selectim item on 
 The most basic way to use this component is as follows:
 
 ```javascript
-import AlpabetListView from 'react-native-alphabetlistview';
+import AlpabetListView from 'react-native-letterlistview';
 
 // inside your render function
 <AlphabetListView

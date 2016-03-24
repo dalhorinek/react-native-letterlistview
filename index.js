@@ -1,5 +1,5 @@
 'use strict';
 
-var SelectableSectionsListView = require('./components/SelectableSectionsListView');
+var LetterListView = require('./components/LetterListView');
 
-module.exports = SelectableSectionsListView;
+module.exports = LetterListView;
