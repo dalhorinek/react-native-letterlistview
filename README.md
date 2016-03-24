@@ -1,42 +1,23 @@
-## Based on johanneslumpe's react-native-selectablesectionlistview, thanks to him for the awesome component!      
-99% of this component was done by @johanneslumpe, and I just replaced the deprecated API for newer react native version(>=0.13), and used a little trick to support both iOS and Android platforms.      
-    
-    
-You can find this component on npm:   
-```
-npm install react-native-alphabetlistview  --save  
-```
-
-## Known issues    
-It takes a very short delay after first render for the right side list to start to response.   
-It has a problem with displaying on landscape orientation.
-    
-    
-
-
-# Following is the original readme
-
 A Listview with a sidebar to directly jump to sections.
 
-Please file issues for missing features or bugs.
-
-I apologize for the bad name.
-
-![How it looks](http://lum.pe/sectionlistview.gif)
+## Based on https://github.com/sunnylqm/react-native-alphabetlistview
+This is a form of sunny's react-native-alphabetlistview with adjustments and some extensions
+It was rewritten to ES6, I changes the mechanism of scrolling, now it's not needed to add cell and section height. 
+Also it shows all letters and when you select the one where are no items, it scrolls to previous which has some data (It's same as in iOS)
+    
+One last addition is that you can pass text and item styles of selectim item on left. 
 
 ## Usage
 
 The most basic way to use this component is as follows:
 
 ```javascript
-var AlphabetListView = require('react-native-alphabetlistview');
+import AlpabetListView from 'react-native-alphabetlistview';
 
 // inside your render function
 <AlphabetListView
   data={yourData}
   cell={YourCellComponent}
-  cellHeight={100}
-  sectionHeaderHeight={22.5}
 />
 ```
 
@@ -110,27 +91,9 @@ A custom component to render as header
 `function`  
 A custom function which has to return a valid React element, which will be used as header.
 
-#### headerHeight
-`number`  
-The height of the rendered header element.  
-**Is required if a header element is used, so the positions can be calculated correctly**
-
 #### cellProps
 `object`  
 An object containing additional props, which will be passed to each cell component
-
-#### sectionHeaderHeight
-`number` **required**  
-The height of the section header component
-
-#### cellHeight
-`number` **required**  
-The height of the cell component
-
-#### useDynamicHeights
-`boolean`  
-Whether to determine the y position to scroll to by calculating header and cell heights or by using the UIManager to measure the position of the destination element. Defaults to `false`  
-**This is an experimental feature. For it to work properly you will most likely have to experiment with different values for `scrollRenderAheadDistance`, depending on the size of your data set.**
 
 #### updateScrollState
 `boolean`  
@@ -143,6 +106,14 @@ Styles to pass to the container
 #### sectionListStyle
 `object|number`  
 Styles to pass to the section list container
+
+#### sectionListItemStyle
+`object|number`  
+Styles to pass to the section list item
+
+#### sectionListItemTextStyle
+`object|number`  
+Styles to pass to the section list item text
 
 ---
 ### Cell component
@@ -157,22 +128,9 @@ The index of the cell inside the current section
 `string`  
 The id of the parent section
 
-#### isFirst
-`boolean`  
-Whether the cell is the first in the section
-
-#### isLast
-`boolean`  
-Whether the cell is the last in the section
-
 #### item
 `mixed`  
 The item to render
-
-#### offsetY
-`number`  
-The current y offset of the list view  
-**If you do not specify `updateScrollState={true}` for the list component, this props will always be 0**
 
 #### onSelect
 `function`  
@@ -274,10 +232,8 @@ class MyComponent extends Component {
       <AlphabetListView
         data={this.state.data}
         cell={Cell}
-        cellHeight={30}
         sectionListItem={SectionItem}
         sectionHeader={SectionHeader}
-        sectionHeaderHeight={22.5}
       />
     );
   }
