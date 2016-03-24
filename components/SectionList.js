@@ -35,6 +35,52 @@ const styles = StyleSheet.create({
 });
 
 class SectionList extends Component {
+  static propTypes = {
+
+    /**
+     * A component to render for each section item
+     */
+    component: PropTypes.func,
+
+    /**
+     * Function to provide a title the section list items.
+     */
+    getSectionListTitle: PropTypes.func,
+
+    /**
+     * Function to be called upon selecting a section list item
+     */
+    onSectionSelect: PropTypes.func,
+
+    /**
+     * The sections to render
+     */
+    sections: PropTypes.array.isRequired,
+
+    /**
+     * A style to apply to the section list container
+     */
+    style: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.object,
+    ]).
+
+    /**
+     * A style to apply to the section list item
+     */
+    itemStyle: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.object,
+    ])
+
+    /**
+     * A style to apply to the section list text item
+     */
+    itemTextStyle: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.object,
+    ])
+  };
 
   constructor(props, context) {
     super(props, context);
@@ -91,15 +137,12 @@ class SectionList extends Component {
 
     this.measureTimer = setTimeout(() => {
       sectionItem.measure((x, y, width, height, pageX, pageY) => {
-        //console.log([x, y, width, height, pageX, pageY]);
         this.measure = {
           y: pageY,
           height
         };
       })
     }, 0);
-
-    //console.log(sectionItem);
   }
 
   generateSectionsList() {
@@ -157,36 +200,5 @@ class SectionList extends Component {
     );
   }
 }
-
-SectionList.propTypes = {
-
-  /**
-   * A component to render for each section item
-   */
-  component: PropTypes.func,
-
-  /**
-   * Function to provide a title the section list items.
-   */
-  getSectionListTitle: PropTypes.func,
-
-  /**
-   * Function to be called upon selecting a section list item
-   */
-  onSectionSelect: PropTypes.func,
-
-  /**
-   * The sections to render
-   */
-  sections: PropTypes.array.isRequired,
-
-  /**
-   * A style to apply to the section list container
-   */
-  style: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.object,
-  ])
-};
 
 module.exports = SectionList;
