@@ -121,7 +121,7 @@ class SelectableSectionsListView extends Component {
     /**
      * Styles to pass to the section list item container
      */
-    sectionListItemStyle: stylesheetProp
+    sectionListItemStyle: stylesheetProp,
 
     /**
      * Styles to pass to the section list item text
