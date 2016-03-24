@@ -1,15 +1,15 @@
 'use strict';
 /* jshint esnext: true */
 
-import React from 'react-native';
-import {
+import React, {
   Component,
   ListView,
   StyleSheet,
   View,
   PropTypes,
   NativeModules
-} from React;
+} from 'react-native';
+
 import merge from 'merge';
 
 import SectionHeader from './SectionHeader'; 
@@ -87,12 +87,6 @@ class SelectableSectionsListView extends Component {
     header: PropTypes.func,
 
     /**
-     * The height of the header element to render. Is required if a
-     * header element is used, so the positions can be calculated correctly
-     */
-    headerHeight: PropTypes.number,
-
-    /**
      * A custom function to render as footer
      */
     renderHeader: PropTypes.func,
@@ -107,23 +101,6 @@ class SelectableSectionsListView extends Component {
      * to each cell component
      */
     cellProps: PropTypes.object,
-
-    /**
-     * The height of the section header component
-     */
-    sectionHeaderHeight: PropTypes.number.isRequired,
-
-    /**
-     * The height of the cell component
-     */
-    cellHeight: PropTypes.number.isRequired,
-
-    /**
-     * Whether to determine the y postion to scroll to by calculating header and
-     * cell heights or by using the UIManager to measure the position of the
-     * destination element. This is an exterimental feature
-     */
-    useDynamicHeights: PropTypes.bool,
 
     /**
      * Whether to set the current y offset as state and pass it to each
@@ -141,6 +118,15 @@ class SelectableSectionsListView extends Component {
      */
     sectionListStyle: stylesheetProp
 
+    /**
+     * Styles to pass to the section list item container
+     */
+    sectionListItemStyle: stylesheetProp
+
+    /**
+     * Styles to pass to the section list item text
+     */
+    sectionListItemTextStyle: stylesheetProp
   };
 
   constructor(props, context) {
@@ -157,8 +143,6 @@ class SelectableSectionsListView extends Component {
     this.renderHeader = this.renderHeader.bind(this);
     this.renderRow = this.renderRow.bind(this);
     this.renderSectionHeader = this.renderSectionHeader.bind(this);
-
-    this.onScroll = this.onScroll.bind(this);
     this.scrollToSection = this.scrollToSection.bind(this);
   }
 
@@ -214,11 +198,11 @@ class SelectableSectionsListView extends Component {
   }
 
   renderRow(item, sectionId, index) {
+    debugger
     var CellComponent = this.props.cell;
     index = parseInt(index, 10);
 
     var isFirst = index === 0;
-    var isLast = this.sectionItemCount[sectionId]-1 === index;
 
     var props = {
       isFirst,
@@ -245,6 +229,8 @@ class SelectableSectionsListView extends Component {
       sectionList = !this.props.hideSectionList &&
         <SectionList
           style={this.props.sectionListStyle}
+          itemStyle={this.props.sectionListItemStyle}
+          itemTextStyle={this.props.sectionListItemStyle}
           onSectionSelect={this.scrollToSection}
           sections={Object.keys(data)}
           data={data}
@@ -265,7 +251,7 @@ class SelectableSectionsListView extends Component {
       this.props.renderHeader;
 
     var props = merge({}, this.props, {
-      onScroll: this.props.onScroll,
+      //onScroll: this.props.onScroll,
       dataSource,
       renderFooter,
       renderHeader,

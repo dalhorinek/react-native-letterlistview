@@ -1,14 +1,13 @@
 'use strict';
 
-import React from 'react-native';
-import {
+import React, {
   Component,
   PropTypes,
   StyleSheet,
   View,
   Text,
   NativeModules
-} = React;
+} from 'react-native';
 
 const UIManager = NativeModules.UIManager;
 
@@ -51,7 +50,7 @@ class SectionHeader extends Component {
       <Text style={styles.text}>{this.props.title}</Text>;
 
     return (
-      <View ref="view" style={styles.container}>
+      <View ref={ this.props.sectionHeaderRef } style={styles.container}>
         {content}
       </View>
     );
