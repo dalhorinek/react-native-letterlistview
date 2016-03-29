@@ -12,7 +12,7 @@ import React, {
 
 import merge from 'merge';
 
-import SectionHeader from './SectionHeader'; 
+import SectionHeader from './SectionHeader';
 import SectionList from './SectionList';
 
 const UIManager = NativeModules.UIManager;
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class SelectableSectionsListView extends Component {
+class LetterListView extends Component {
 
   static propTypes = {
     /**
@@ -139,6 +139,7 @@ class SelectableSectionsListView extends Component {
       })
     };
 
+    this.sections = {};
     this.renderFooter = this.renderFooter.bind(this);
     this.renderHeader = this.renderHeader.bind(this);
     this.renderRow = this.renderRow.bind(this);
@@ -157,18 +158,12 @@ class SelectableSectionsListView extends Component {
 
   scrollToSection(section) {
     var y = this.props.headerHeight || 0;
+    y = y - this.props.sectionHeaderHeight;
 
-    var sectionRef = this.refs['section_' + section];
+    var sectionY = this.sections[section];
 
-    debugger
-    if ( sectionRef ) {
-      UIManager.measure(sectionRef, (x, y, w, h) => {
-        y = y - this.props.sectionHeaderHeight;
-
-        this.refs.listview.refs.listviewscroll.scrollTo(y, 0, false);
-        this.props.onScrollToSection && this.props.onScrollToSection(section);
-      });
-    }
+    this.refs.listview.refs.listviewscroll.scrollTo(sectionY, 0, false);
+    this.props.onScrollToSection && this.props.onScrollToSection(section);
   }
 
   renderSectionHeader(sectionData, sectionId) {
@@ -180,6 +175,13 @@ class SelectableSectionsListView extends Component {
       <SectionHeader
         component={this.props.sectionHeader}
         ref={`section_${sectionId}`}
+        sectionHeaderRef={ ref => {
+          setTimeout(() => {
+            ref.measure((x, y, w, h) => {
+              this.sections[sectionId] = y;
+            });
+          }, 0);
+        }}
         title={title}
         sectionId={sectionId}
         sectionData={sectionData}
@@ -198,7 +200,6 @@ class SelectableSectionsListView extends Component {
   }
 
   renderRow(item, sectionId, index) {
-    debugger
     var CellComponent = this.props.cell;
     index = parseInt(index, 10);
 
@@ -206,7 +207,6 @@ class SelectableSectionsListView extends Component {
 
     var props = {
       isFirst,
-      isLast,
       sectionId,
       index,
       item,
@@ -271,4 +271,4 @@ class SelectableSectionsListView extends Component {
   }
 }
 
-module.exports = SelectableSectionsListView;
+module.exports = LetterListView;

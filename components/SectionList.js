@@ -63,7 +63,7 @@ class SectionList extends Component {
     style: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.object,
-    ]).
+    ]),
 
     /**
      * A style to apply to the section list item
@@ -71,7 +71,7 @@ class SectionList extends Component {
     itemStyle: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.object,
-    ])
+    ]),
 
     /**
      * A style to apply to the section list text item
