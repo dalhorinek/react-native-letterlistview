@@ -166,8 +166,7 @@ class SectionList extends Component {
 
   render() {
     var SectionComponent = this.props.component;
-    var sectionItemStyle = this.props.itemStyle;
-    var sectionItemTextStyle = this.props.itemTextStyle;
+    var { itemStyle, itemTextStyle } = this.props;
 
     var sections = this.sections.map((section, index) => {
       var child = SectionComponent ?
@@ -176,8 +175,9 @@ class SectionList extends Component {
           title={section}
         /> :
         <View
-          style={[styles.item, sectionItemStyle]}>
-          <Text style={[styles.text, sectionItemTextStyle]}>{title}</Text>
+          style={[styles.item, itemStyle]}
+        >
+          <Text style={[styles.text, itemTextStyle]}>{section}</Text>
         </View>;
 
         return (

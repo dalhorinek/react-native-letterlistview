@@ -232,7 +232,7 @@ class LetterListView extends Component {
         <SectionList
           style={this.props.sectionListStyle}
           itemStyle={this.props.sectionListItemStyle}
-          itemTextStyle={this.props.sectionListItemStyle}
+          itemTextStyle={this.props.sectionListItemTextStyle}
           onSectionSelect={this.scrollToSection}
           sections={Object.keys(data)}
           data={data}
