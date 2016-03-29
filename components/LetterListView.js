@@ -176,11 +176,13 @@ class LetterListView extends Component {
         component={this.props.sectionHeader}
         ref={`section_${sectionId}`}
         sectionHeaderRef={ ref => {
-          setTimeout(() => {
-            ref.measure((x, y, w, h) => {
-              this.sections[sectionId] = y;
-            });
-          }, 0);
+          if (ref) {
+            setTimeout(() => {
+              ref.measure((x, y, w, h) => {
+                this.sections[sectionId] = y;
+              });
+            }, 0);
+          }
         }}
         title={title}
         sectionId={sectionId}
