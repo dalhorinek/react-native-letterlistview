@@ -77,6 +77,11 @@ class LetterListView extends Component {
     sectionHeader: PropTypes.func,
 
     /**
+     * Provide custom ListView implementation
+     */
+    listView: PropTypes.func,
+
+    /**
      * A custom element to render as footer
      */
     footer: PropTypes.func,
@@ -252,6 +257,8 @@ class LetterListView extends Component {
       this.renderHeader :
       this.props.renderHeader;
 
+    var ListViewComponent = this.props.listView || ListView;
+
     var props = merge({}, this.props, {
       //onScroll: this.props.onScroll,
       dataSource,
@@ -263,7 +270,7 @@ class LetterListView extends Component {
 
     return (
       <View ref="view" style={styles.container}>
-        <ListView
+        <ListViewComponent
           ref="listview"
           {...props}
         />

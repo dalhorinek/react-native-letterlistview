@@ -1,6 +1,6 @@
 {
   "name": "react-native-letterlistview",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Listview with a sidebar with letters to jump to sections directly, based on sunny's react-native-alphabetlistview",
   "main": "index.js",
   "scripts": {

@@ -12,10 +12,10 @@ One last addition is that you can pass text and item styles of selectim item on 
 The most basic way to use this component is as follows:
 
 ```javascript
-import AlpabetListView from 'react-native-letterlistview';
+import LetterListView from 'react-native-letterlistview';
 
 // inside your render function
-<AlphabetListView
+<LetterListView
   data={yourData}
   cell={YourCellComponent}
 />
@@ -25,7 +25,7 @@ You can find a more complete example below
 
 ## Props
 
-### SelectableSectionsListView
+### LetterListView
 
 All props are passed through to the underlying `ListView`, so you can specify all the available props for `ListView` normally - except the following, which are defined internally and will be overwritten:
 
@@ -34,6 +34,7 @@ All props are passed through to the underlying `ListView`, so you can specify al
 * `dataSource`
 * `renderRow`
 * `renderSectionHeader`
+* `listView`
 
 #### data
 `array|object`, **required**  
@@ -71,6 +72,10 @@ A custom component to render for each section list item
 #### sectionHeader
 `function`  
 A custom component to render for each section header
+
+#### listView 
+`function`
+A custom ListView component
 
 #### footer
 `function`  
