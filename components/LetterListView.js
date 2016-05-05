@@ -152,22 +152,12 @@ class LetterListView extends Component {
     this.scrollToSection = this.scrollToSection.bind(this);
   }
 
-  componentDidMount() {
-    // push measuring into the next tick
-    setTimeout(() => {
-      UIManager.measure(React.findNodeHandle(this.refs.view), (x,y,w,h) => {
-        this.containerHeight = h;
-      });
-    }, 0);
-  }
-
   scrollToSection(section) {
     var y = this.props.headerHeight || 0;
     y = y - this.props.sectionHeaderHeight;
 
     var sectionY = this.sections[section];
-
-    this.refs.listview.refs.listviewscroll.scrollTo(sectionY, 0, false);
+    this.refs.listview.refs.listviewscroll.scrollTo({ y: sectionY, x: 0, animated: false });
     this.props.onScrollToSection && this.props.onScrollToSection(section);
   }
 
@@ -180,14 +170,9 @@ class LetterListView extends Component {
       <SectionHeader
         component={this.props.sectionHeader}
         ref={`section_${sectionId}`}
-        sectionHeaderRef={ ref => {
-          if (ref) {
-            setTimeout(() => {
-              ref.measure((x, y, w, h) => {
-                this.sections[sectionId] = y;
-              });
-            }, 0);
-          }
+        onLayout={event => {
+          const layout = event.nativeEvent.layout;
+          this.sections[sectionId] = layout.y;
         }}
         title={title}
         sectionId={sectionId}

@@ -45,13 +45,18 @@ class SectionHeader extends Component {
 
   render() {
     var SectionComponent = this.props.component;
-    var content = SectionComponent ?
-      <SectionComponent {...this.props} /> :
-      <Text style={styles.text}>{this.props.title}</Text>;
+
+    if (SectionComponent) {
+      return (
+        <View ref={this.props.sectionHeaderRef} onLayout={this.props.onLayout}>
+          <SectionComponent {...this.props} />
+        </View>
+      );
+    }
 
     return (
-      <View ref={ this.props.sectionHeaderRef } style={styles.container}>
-        {content}
+      <View ref={this.props.sectionHeaderRef} style={styles.container} onLayout={this.props.onLayout}>
+        <Text style={styles.text}>{this.props.title}</Text>
       </View>
     );
   }

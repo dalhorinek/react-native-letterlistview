@@ -106,43 +106,32 @@ class SectionList extends Component {
   }
 
   detectAndScrollToSection(e) {
-    const { y, height } = this.measure;
+    const sectionItem = this.refs.sectionItem0;
 
     var { data } = this.props;
     var ev = e.nativeEvent.touches[0];
     var targetY = ev.pageY;
 
-    if(!y || targetY < y){
-      return;
-    }
+    sectionItem.measure((x, y, width, height, pageX, pageY) => {
+      if(!pageY || targetY < y){
+        return;
+      }
 
-    var index = Math.floor((targetY - y) / height);
-    index = Math.min(index, this.sections.length - 1);
+      var index = Math.floor((targetY - pageY) / height);
+      index = Math.min(index, this.sections.length - 1);
 
-    var currentSection = this.sections[index];
+      var currentSection = this.sections[index];
 
-    while ( (!data[currentSection] || !data[currentSection].length) && index > 0 ) {
-      index--;
-      currentSection = this.sections[index];
-    }
+      while ( (!data[currentSection] || !data[currentSection].length) && index > 0 ) {
+        index--;
+        currentSection = this.sections[index];
+      }
 
-    if (this.lastSelectedIndex !== index) {
-      this.lastSelectedIndex = index;
-      this.onSectionSelect(currentSection, true);
-    }
-  }
-
-  componentDidMount() {
-    const sectionItem = this.refs.sectionItem0;
-
-    this.measureTimer = setTimeout(() => {
-      sectionItem.measure((x, y, width, height, pageX, pageY) => {
-        this.measure = {
-          y: pageY,
-          height
-        };
-      })
-    }, 0);
+      if (this.lastSelectedIndex !== index) {
+        this.lastSelectedIndex = index;
+        this.onSectionSelect(currentSection, true);
+      }
+    });
   }
 
   generateSectionsList() {
